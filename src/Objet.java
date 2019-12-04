@@ -7,12 +7,21 @@ public class Objet {
 	protected String arrete;
 	protected ArrayList<Objet> sommetRelie;
 	protected boolean estPlace;
+	protected String numSommet;
 	
 	public Objet(int h) {
 		hight = h;
 		this.estPlace = false;
 		this.sommetRelie = new ArrayList<Objet>();
 	}
+	
+	public Objet(String num, int h ) {
+		this.numSommet = num;
+		hight = h;
+		this.estPlace = false;
+		this.sommetRelie = new ArrayList<Objet>();
+	}
+	
 	
 	public Objet(int h, ArrayList<Objet> sommetRelie) {
 		hight = h;
@@ -70,6 +79,21 @@ public class Objet {
 		this.arrete = arrete;
 	}
 	
+	
+	public String getNumSommet() {
+		return numSommet;
+	}
+
+	public void setNumSommet(String numSommet) {
+		this.numSommet = numSommet;
+	}
+
+	public void afficheObjetConflit() {
+		for(Objet o : this.sommetRelie) {
+			System.out.println(o.getNumSommet());
+		}
+		
+	}
 	
 	
 }

@@ -7,12 +7,12 @@ public class Boite {
 	protected int HAUTEUR_BOITE ;
 	protected int tailleOccupé;
 	protected ArrayList<Objet> listObjetDansLaboite;
-	protected Map<Integer,Integer> listeDescouple;
+	protected Map<String,Integer> listeDescouple;
 	
 	
 	public Boite(int h) {
 		this.HAUTEUR_BOITE = h;
-		this.listeDescouple = new HashMap<Integer, Integer>();
+		this.listeDescouple = new HashMap<String, Integer>();
 		listObjetDansLaboite = new ArrayList<Objet>();
 		
 	}
@@ -28,15 +28,15 @@ public class Boite {
 		return false;// faux si il y a pas de conflit
 	}
 	
-	public void putObjetToBox(int i , Objet objet) {
+	public void putObjetToBox(String i , Objet objet) {
 		this.listeDescouple.put(i, objet.getHight()); // [indice - taile de la boite]
 		this.listObjetDansLaboite.add(objet);
-		this.setHAUTEUR_BOITE(HAUTEUR_BOITE-objet.getHight());
+		this.setTailleOccupé(this.getTailleOccupé() + objet.getHight());
 	}
 	
 	public String affichedetailleContenu() {
 		String s = "[";
-		for (Map.Entry<Integer,Integer> e : listeDescouple.entrySet()){
+		for (Map.Entry<String,Integer> e : listeDescouple.entrySet()){
 		    s += e.getKey()+ "-" + e.getValue()+  "," ;
 		}
 		s+="]";
