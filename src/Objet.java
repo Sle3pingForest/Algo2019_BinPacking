@@ -8,6 +8,8 @@ public class Objet {
 	protected ArrayList<Objet> sommetRelie;
 	protected boolean estPlace;
 	protected String numSommet;
+	protected boolean isColored = false;
+	protected int couleur  = -1 ;
 	
 	public Objet(int h) {
 		hight = h;
@@ -51,6 +53,10 @@ public class Objet {
 		return sommetRelie;
 	}
 
+	public int getDegreSommet() {
+		return sommetRelie.size();
+	}
+	
 	public void setSommetRelie(ArrayList<Objet> sommetRelie) {
 		this.sommetRelie = sommetRelie;
 	}
@@ -86,6 +92,22 @@ public class Objet {
 
 	public void setNumSommet(String numSommet) {
 		this.numSommet = numSommet;
+	}
+
+	public boolean isColored() {
+		return isColored;
+	}
+
+	public void setColored(boolean isColored) {
+		this.isColored = isColored;
+	}
+
+	public int getCouleur() {
+		return couleur;
+	}
+
+	public void setCouleur(int couleur) {
+		this.couleur = couleur;
 	}
 
 	public void afficheObjetConflit() {

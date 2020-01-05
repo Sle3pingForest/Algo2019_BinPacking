@@ -22,6 +22,7 @@ public class Boite {
 	public boolean checkConflitInputObjet(Objet objet) {
 		for( Objet o: listObjetDansLaboite) {
 			if(o.checkConflit(objet)) { // on verifie pour chaque objet dans la boite si il est en conflit avec l'objet entrant
+				System.out.println("L'objet: "+ objet.getNumSommet() + " est en conflit avec:  " + o.getNumSommet());
 				return true; // vrai si ya un conflit avec l'objet entrant
 			}
 		}
