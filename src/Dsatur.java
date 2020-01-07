@@ -5,18 +5,20 @@ import java.util.Set;
 
 public class Dsatur {
 	
-	public LoadGraph G;
 	public ArrayList<Objet> U;
 	public ArrayList<Objet> C;
+	public ArrayList<Objet> V;
 	public int nbSommet;
-	public Dsatur( int nbSommet, String path) {
-		this.G = new LoadGraph(nbSommet);
-		this.G.loadFile(path);
-		this.nbSommet = nbSommet;
+	public Dsatur( ArrayList<Objet> listSommet) {
+		this.nbSommet = listSommet.size();
+		this.V = new ArrayList<Objet>();
+		for(Objet objet: listSommet) {
+			objet.setEstPlace(false);
+			this.V.add(objet);
+		}
 
 		this.C = new ArrayList<Objet>();
 		this.U = new ArrayList<Objet>();
-		
 	}
 
 	
@@ -24,15 +26,15 @@ public class Dsatur {
 		//ordonner les sommets par ordre decroissantes de degres.
 		int d = 0;
 		int indice_d_max = 0;
-		while (this.G.getListSommet().size() != 0) {
-			for(int j = 0 ; j  < this.G.getListSommet().size(); j++ ) {
-				if(d < this.G.getListSommet().get(j).getDegreSommet()) {
-					d = this.G.getListSommet().get(j).getDegreSommet();
+		while (this.V.size() != 0) {
+			for(int j = 0 ; j  < this.V.size(); j++ ) {
+				if(d < this.V.get(j).getDegreSommet()) {
+					d = this.V.get(j).getDegreSommet();
 					indice_d_max = j;
 				}
 			}
-			this.U.add(this.G.getListSommet().get(indice_d_max));
-			this.G.getListSommet().remove(indice_d_max);
+			this.U.add(this.V.get(indice_d_max));
+			this.V.remove(indice_d_max);
 			d = 0;
 		}
 		
@@ -109,14 +111,17 @@ public class Dsatur {
 		}
 	}
 	
-	public LoadGraph getG() {
-		return G;
+	public ArrayList<Objet> getV() {
+		
+		return V;
 	}
 
 
-	public void setG(LoadGraph g) {
-		G = g;
+	public void setV(ArrayList<Objet> v) {
+		V = v;
 	}
+
+
 
 
 	public ArrayList<Objet> getU() {

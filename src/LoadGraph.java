@@ -9,14 +9,17 @@ import java.util.Random;
 public class LoadGraph {
 	
 	protected ArrayList<Objet> listSommet;
+	protected ArrayList<Objet> listSommet2;
 	
 	public LoadGraph(int numSommet){
 		this.listSommet = new ArrayList<Objet>();
+		this.listSommet2 = new ArrayList<Objet>();
 		//int x = 125;
 		for(int i = 0; i < numSommet ; i++) {
 			Random rnd = new Random();
 			int x = 10 + rnd.nextInt(40);
 			this.listSommet.add(new Objet(""+ (i + 1), x));// pour les hauteur d'objet , pour facilite le codage, je commence a cre une boite de taille 50 et tremine par taille 1 , comme ca les objet sont deja trie.
+			this.listSommet2.add(new Objet(""+ (i + 1), x));
 			//x--; 
 
 		}
@@ -35,6 +38,7 @@ public class LoadGraph {
 					String[] arrOfStr = ligne.split(" ");
 					//System.out.println(arrOfStr[1] + "****" + arrOfStr[2] + "*****" + listSommet.get(Integer.parseInt(String.valueOf(arrOfStr[1]))-1).getNumSommet() + "****" + listSommet.get(Integer.parseInt(String.valueOf(arrOfStr[2]))-1).getNumSommet()) ;
 					listSommet.get(Integer.parseInt(String.valueOf(arrOfStr[1]))-1).settingSommetRelie(listSommet.get(Integer.parseInt(String.valueOf(arrOfStr[2])) -1));
+					listSommet2.get(Integer.parseInt(String.valueOf(arrOfStr[1]))-1).settingSommetRelie(listSommet2.get(Integer.parseInt(String.valueOf(arrOfStr[2])) -1));
 				
 				}
 			}
@@ -47,6 +51,10 @@ public class LoadGraph {
 
 	public ArrayList<Objet> getListSommet() {
 		return listSommet;
+	}
+	
+	public ArrayList<Objet> getListSommet2() {
+		return listSommet2;
 	}
 
 	public void setListSommet(ArrayList<Objet> listSommet) {

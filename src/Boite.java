@@ -43,7 +43,7 @@ public class Boite {
 	public String affichedetailleContenu() {
 		String s = "[";
 		for (Map.Entry<String,Integer> e : listeDescouple.entrySet()){
-		    s += e.getKey()+ "*" + e.getValue()+  "," ;
+		    s += e.getKey()+ "-" + e.getValue()+  "," ;
 		}
 		s+="]";
 		return s;
