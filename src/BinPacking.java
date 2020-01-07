@@ -38,7 +38,6 @@ public class BinPacking {
 				boite.setHAUTEUR_BOITE(tailleBoite);
 			}
 		}
-		System.out.println(listObjets.size());
 		for(int indiceObjet = 0 ; indiceObjet < listObjets.size(); indiceObjet++) {// on prend un objet LAMDA dans la list
 			for(Boite boite : listeBoitesFFD) {//on prend une boite 
 				int tailleIntermediaire = boite.getTailleOccupé() + listObjets.get(indiceObjet).getHight();
@@ -60,6 +59,8 @@ public class BinPacking {
 
 		return afficheLesboite(listeBoitesFFD, tailleBoite );
 	}
+	
+	
 	
 	/**cette algo : on remplie dans dans la boite, apres le remplissage, l'hauteur de la boite est le PLUS grand parrapport a les autre boites
 	 * 
@@ -99,6 +100,47 @@ public class BinPacking {
 	}
 	
 	
+	
+	/**
+	 * 
+	 * @param listBoites
+	 * @param tailleInit
+	 * @return
+	 */
+	
+	public String DsaturWithFFDpacking(ArrayList<Objet> listObjets, int tailleBoite) {
+		listeBoitesFFD = new ArrayList<Boite>();
+		if(listeBoitesFFD.size() == 0) {// vefirie si on a des boite dispo 
+			Boite b = new Boite(tailleBoite); // creer une nouvelle boite si on a pas et on ajoute dans la liste des boite
+			listeBoitesFFD.add(b);
+			b.getListcolor().add(1);
+		}
+		else {//si non on modifie la taille des boites 
+			for(Boite boite : listeBoitesFFD) { 
+				boite.setHAUTEUR_BOITE(tailleBoite);
+			}
+		}
+		for(int indiceObjet = 0 ; indiceObjet < listObjets.size(); indiceObjet++) {// on prend un objet LAMDA dans la list
+			for(Boite boite : listeBoitesFFD) {//on prend une boite 
+				int tailleIntermediaire = boite.getTailleOccupé() + listObjets.get(indiceObjet).getHight();
+				if(!listObjets.get(indiceObjet).estPlace && tailleIntermediaire <= boite.getHAUTEUR_BOITE()) {//on check s'il reste de la place dans la boite
+					if(boite.checkColor(listObjets.get(indiceObjet)) || !boite.checkConflitInputObjet(listObjets.get(indiceObjet))) {// puis on verifie si l'objet LAMDA est en conflit avec les objet dans la boite CAD si ya une objet meme couleur que lui dans la boite
+						boite.putObjetToBox(listObjets.get(indiceObjet).getNumSommet(),listObjets.get(indiceObjet));
+						listObjets.get(indiceObjet).setEstPlace(true);
+						
+					}
+				}
+			}
+			if(!listObjets.get(indiceObjet).estPlace) {// si il n'y a plus de boite dispo, on creat une nouvelle boite
+				Boite b = new Boite(tailleBoite);
+				b.putObjetToBox(listObjets.get(indiceObjet).getNumSommet(), listObjets.get(indiceObjet));
+				listObjets.get(indiceObjet).setEstPlace(true);
+				listeBoitesFFD.add(b);
+			}
+		}
+		return afficheLesboite(listeBoitesFFD,tailleBoite);
+	}
+	
 	public  String afficheLesboite(ArrayList<Boite> listBoites, int tailleInit){
 		String s = "";
 		int nb = 1;
@@ -114,22 +156,22 @@ public class BinPacking {
 
 		BinPacking bp = new BinPacking();
 
-		LoadGraph load = new LoadGraph(50);
-		load.loadFile("./graphes-conflits/50.txt");
-		load.getListSommet().get(0).afficheObjetConflit();
+		LoadGraph load = new LoadGraph(125);
+		load.loadFile("./graphes-conflits/125.txt");
 		
 	
 		System.out.println("######################");
-		System.out.println(bp.FirstFitDecreasingPacking(load.getListSommet(), 150));
-		//System.out.println(bp.BestFitDecreasingPacking(load.getListSommet(), 150));
-		
-		System.out.println("######################");
-		Dsatur ds = new Dsatur(50, "./graphes-conflits/50.txt");
+		Dsatur ds = new Dsatur(125, "./graphes-conflits/125.txt");
 		ds.AlgoDSatur();
 		
 		for(Objet o : ds.getU()) {
-			System.out.println("sommet num: " + o.getNumSommet() + ", degre: " +  o.getDegreSommet() + " couleur: " +  o.getCouleur() );
+			//System.out.println("sommet num: " + o.getNumSommet() + ", degre: " +  o.getDegreSommet() + " couleur: " +  o.getCouleur() );
 		}
+		
+		System.out.println("######################");
+		System.out.println(bp.FirstFitDecreasingPacking(load.getListSommet(), 150));
+		//System.out.println(bp.BestFitDecreasingPacking(load.getListSommet(), 150));
+		System.out.println(bp.DsaturWithFFDpacking(ds.getU(), 150));
 		
 	}
 

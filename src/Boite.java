@@ -6,6 +6,7 @@ import java.util.Map;
 public class Boite {
 	protected int HAUTEUR_BOITE ;
 	protected int tailleOccupé;
+	protected ArrayList<Integer> listcolor;
 	protected ArrayList<Objet> listObjetDansLaboite;
 	protected Map<String,Integer> listeDescouple;
 	
@@ -14,7 +15,7 @@ public class Boite {
 		this.HAUTEUR_BOITE = h;
 		this.listeDescouple = new HashMap<String, Integer>();
 		listObjetDansLaboite = new ArrayList<Objet>();
-		
+		this.listcolor = new ArrayList<Integer>();
 	}
 
 	
@@ -22,7 +23,6 @@ public class Boite {
 	public boolean checkConflitInputObjet(Objet objet) {
 		for( Objet o: listObjetDansLaboite) {
 			if(o.checkConflit(objet)) { // on verifie pour chaque objet dans la boite si il est en conflit avec l'objet entrant
-				System.out.println("L'objet: "+ objet.getNumSommet() + " est en conflit avec:  " + o.getNumSommet());
 				return true; // vrai si ya un conflit avec l'objet entrant
 			}
 		}
@@ -33,12 +33,17 @@ public class Boite {
 		this.listeDescouple.put(i, objet.getHight()); // [indice - taile de la boite]
 		this.listObjetDansLaboite.add(objet);
 		this.setTailleOccupé(this.getTailleOccupé() + objet.getHight());
+		this.listcolor.add(objet.getCouleur());
+	}
+	
+	public boolean checkColor(Objet o) {
+		return this.listcolor.contains(o.getCouleur());
 	}
 	
 	public String affichedetailleContenu() {
 		String s = "[";
 		for (Map.Entry<String,Integer> e : listeDescouple.entrySet()){
-		    s += e.getKey()+ "-" + e.getValue()+  "," ;
+		    s += e.getKey()+ "*" + e.getValue()+  "," ;
 		}
 		s+="]";
 		return s;
@@ -58,6 +63,18 @@ public class Boite {
 
 	public void setTailleOccupé(int tailleOccupé) {
 		this.tailleOccupé = tailleOccupé;
+	}
+
+
+
+	public ArrayList<Integer> getListcolor() {
+		return listcolor;
+	}
+
+
+
+	public void setListcolor(ArrayList<Integer> listcolor) {
+		this.listcolor = listcolor;
 	}
 
 

@@ -12,12 +12,12 @@ public class LoadGraph {
 	
 	public LoadGraph(int numSommet){
 		this.listSommet = new ArrayList<Objet>();
-		int x = 50;
+		//int x = 125;
 		for(int i = 0; i < numSommet ; i++) {
-			/*Random rnd = new Random();
-			int x = 10 + rnd.nextInt(40);*/
+			Random rnd = new Random();
+			int x = 10 + rnd.nextInt(40);
 			this.listSommet.add(new Objet(""+ (i + 1), x));// pour les hauteur d'objet , pour facilite le codage, je commence a cre une boite de taille 50 et tremine par taille 1 , comme ca les objet sont deja trie.
-			x--; 
+			//x--; 
 
 		}
 	}
