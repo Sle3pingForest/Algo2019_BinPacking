@@ -23,7 +23,7 @@ public class LireGraphe {
 
     private int nbVar =0;
     private int nbligne=0;
-    public final static String path = FileSystems.getDefault().getPath(".").toAbsolutePath().toString() + "/src/algo/graphes/Graph3.txt";
+    public final static String path = FileSystems.getDefault().getPath(".").toAbsolutePath().toString() + "/src/algo/graphes/Graph7.txt";
     private int[][] graphe;
     private String c1 = "R";
     private String c2 = "V";
@@ -44,10 +44,11 @@ public class LireGraphe {
         while ((ligneGraphe = helpReader.readLine()) != null) {
             char[] vars = ligneGraphe.toCharArray();
 
-            for (c = 0; c < vars.length; c++) {
+            for (c = 0; c < vars.length ; c++) {
                 this.graphe[l][c] = Integer.valueOf(String.valueOf(vars[c]));
             }
-            l++;}
+            l++;
+        }
         helpReader.close();
     }
     
@@ -74,8 +75,8 @@ public class LireGraphe {
             g.sommets.add(S);
         }
 
-        for (int i = 0; i < nbligne; i++) {
-            for (int j = 0; j < nbVar; j++) {
+        for (int i = 0; i < nbVar; i++) {
+            for (int j = 0; j < nbligne; j++) {
                 Sommet act;
                 if (graphe[i][j] != 0) {
                     act = g.sommets.get(i);
@@ -95,15 +96,17 @@ public class LireGraphe {
 
     public void CreerContrainte() {
         this.contraintes =new Contraintes();
-        for (int i = 0; i < nbligne; i++) {
-            for (int j = 0; j < nbVar; j++) {             
+        for (int i = 0; i < nbVar; i++) {
+            for (int j = 0; j < nbligne; j++) {             
                 Sommet act =g.sommets.get(i);
                 if (graphe[i][j] != 0) {      
-                     this.voisinCommun(act,g.sommets.get(j) );
+                    this.voisinCommun(act,g.sommets.get(j) );
                     
                      this.contraintes.addClause(new Clause(g.sommets.get(i).name, "R",g.sommets.get(j).name, "R"));
                   //  c = new Clause(g.sommets.get(j).name, "R");
-                    this.contraintes.addClause(new Clause(g.sommets.get(j).name, "R"));
+                   this.contraintes.addClause(new Clause(g.sommets.get(j).name, "B"));
+                   // this.contraintes.addClause(new Clause(g.sommets.get(i).name, "R"));
+                   
 
                 }
             }
@@ -118,7 +121,9 @@ public class LireGraphe {
                    if(s.voisins.get(i).name.equals(c.voisins.get(j).name)){
                           this.contraintes.addClause(new Clause(s.name, "R" , c.name , "R"));
                           this.contraintes.addClause(new Clause(c.name, "B" , s.voisins.get(i).name , "B"));
-                          this.contraintes.Cas4(new Clause(s.voisins.get(i).name, "V"));
+                          this.contraintes.Cas4(new Clause(s.voisins.get(i).name, "R"));
+                            this.contraintes.Cas4(new Clause(s.voisins.get(i).name, "B"));
+                          
                    }
                    
             }

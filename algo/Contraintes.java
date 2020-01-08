@@ -119,8 +119,8 @@ public class Contraintes {
 
     public boolean parcourirAlgo() {
         Boolean n ;
-        n= this.parcourirCas1();
-        if(n){
+       n= this.parcourirCas1();
+       if(n){
             this.parcourirCas2();
             this.parcourirCas3();
             if(this.ListecontrainteUn().isEmpty())
@@ -128,9 +128,9 @@ public class Contraintes {
                 this.parcourirCas4();
            return  parcourirAlgo();
             }
-            
-        }
-       return n  ;
+       }
+        
+       return true  ;
     }
 
     public boolean cas1(Clause c) {
@@ -148,11 +148,11 @@ public class Contraintes {
 
         for (Clause clause : con) {
             String s2 = clause.getVar();
-           
+             System.out.println(" clause " + s2);
                 if (s1.compareTo(s2) == 0) {
                     if (cl.contains(clause) == false) {
                         cl.add(clause);
-                        System.out.println(" clause " + cl.get(0).getVar());
+                      
                         if (color.contains(clause.getColor()) == false) {
                             color.add(clause.getColor());
                         }
