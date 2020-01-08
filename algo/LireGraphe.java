@@ -23,7 +23,7 @@ public class LireGraphe {
 
     private int nbVar =0;
     private int nbligne=0;
-    public final static String path = FileSystems.getDefault().getPath(".").toAbsolutePath().toString() + "/src/algo/graphes/Graph7.txt";
+    public final static String path = FileSystems.getDefault().getPath(".").toAbsolutePath().toString() + "/src/algo/graphes/Graph10.txt";
     private int[][] graphe;
     private String c1 = "R";
     private String c2 = "V";
@@ -102,13 +102,15 @@ public class LireGraphe {
                 if (graphe[i][j] != 0) {      
                     this.voisinCommun(act,g.sommets.get(j) );
                     
-                     this.contraintes.addClause(new Clause(g.sommets.get(i).name, "R",g.sommets.get(j).name, "R"));
+                  //   this.contraintes.addClause(new Clause(g.sommets.get(i).name, "R",g.sommets.get(j).name, "R"));
                   //  c = new Clause(g.sommets.get(j).name, "R");
-                   this.contraintes.addClause(new Clause(g.sommets.get(j).name, "B"));
+                  // this.contraintes.addClause(new Clause(g.sommets.get(j).name, "B"));
                    // this.contraintes.addClause(new Clause(g.sommets.get(i).name, "R"));
                    
 
                 }
+                else
+                     this.contraintes.addClause(new Clause(g.sommets.get(i).name, "B")); 
             }
 
         }
