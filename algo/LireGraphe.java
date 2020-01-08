@@ -104,8 +104,8 @@ public class LireGraphe {
                     
                     this.contraintes.addClause(new Clause(g.sommets.get(i).name, "R",g.sommets.get(j).name, "R"));
                   //  c = new Clause(g.sommets.get(j).name, "R");
-                  // this.contraintes.addClause(new Clause(g.sommets.get(j).name, "B"));
-                   // this.contraintes.addClause(new Clause(g.sommets.get(i).name, "R"));
+                  this.contraintes.addClause(new Clause(g.sommets.get(j).name, "B"));
+                   this.contraintes.addClause(new Clause(g.sommets.get(i).name, "R"));
                    
 
                 }
@@ -124,7 +124,7 @@ public class LireGraphe {
                           this.contraintes.addClause(new Clause(s.name, "R" , c.name , "R"));
                           this.contraintes.addClause(new Clause(c.name, "B" , s.voisins.get(i).name , "B"));
                            
-                          this.contraintes.Cas4(new Clause(s.voisins.get(i).name, "V"));
+                          this.contraintes.addClause(new Clause(s.voisins.get(i).name, "V"));
                          // this.contraintes.Cas4(new Clause(c.voisins.get(i).name, "B"));
                           
                    }
