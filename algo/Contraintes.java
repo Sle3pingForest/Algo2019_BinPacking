@@ -53,7 +53,7 @@ public class Contraintes {
     public void addClause(Clause c) {
         this.contrainte.add(c);
 
-        if (c.getUniare() == true) {
+        /*  if (c.getUniare() == true) {
             if (this.verifExistance(c.getVar()) == false) {
                 var.add(c.getVar());
                 this.setNbVarDiff(this.getNbVarDiff() + 1);
@@ -82,7 +82,7 @@ public class Contraintes {
                 this.setNbVarDiff(this.getNbVarDiff() + 1);
             }
 
-        }
+        }*/
 
     }
 
@@ -144,11 +144,11 @@ public class Contraintes {
         String s1 = c.getVar();
         cl.add(c);
         color.add(c.getColor());
-        List<Clause> con = this.getContraintes();
+        List<Clause> con = this.ListecontrainteUn();
 
         for (Clause clause : con) {
             String s2 = clause.getVar();
-            if (clause.getUniare()) {
+           
                 if (s1.compareTo(s2) == 0) {
                     if (cl.contains(clause) == false) {
                         cl.add(clause);
@@ -157,7 +157,7 @@ public class Contraintes {
                             color.add(clause.getColor());
                         }
                     }
-                }
+                
             }
         }
         if (color.contains("R") && color.contains("B") && color.contains("V")) {
